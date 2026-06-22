@@ -12,8 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('issues', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+          $table->id();
+          $table->foreignId('project_id')->constrained()->cascadeOnDelete();
+          $table->string('title');
+          $table->text('description')->nullable();
+          $table->enum('status', ['open', 'in_progress', 'closed']);
+          $table->enum('priority', ['low', 'medium', 'high']);
+          $table->date('due_date')->nullable();
+          $table->timestamps();
         });
     }
 

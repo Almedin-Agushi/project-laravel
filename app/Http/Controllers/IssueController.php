@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Issue;
 use Illuminate\Http\Request;
+use App\Models\Project;
 
 class IssueController extends Controller
 {
@@ -12,7 +13,9 @@ class IssueController extends Controller
      */
     public function index()
     {
-        //
+         $issues = Issue::with('project')->get();
+
+    return view('issues.index', compact('issues'));
     }
 
     /**
@@ -20,7 +23,9 @@ class IssueController extends Controller
      */
     public function create()
     {
-        //
+        $projects = Project::all();
+
+    return view('issues.create', compact('projects'));
     }
 
     /**
@@ -28,7 +33,9 @@ class IssueController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         Issue::create($request->validated());
+
+    return redirect()->route('issues.index');
     }
 
     /**
