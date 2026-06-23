@@ -32,11 +32,19 @@ class IssueController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-         Issue::create($request->validated());
+{
+   $validated = $request->validate([
+    'project_id' => 'required|exists:projects,id',
+    'title' => 'required|string',
+    'description' => 'required|string',
+    'status' => 'required|string',
+    'priority' => 'required|string',
+    'due_date' => 'required|date',
+]);
+Issue::create($validated);
 
     return redirect()->route('issues.index');
-    }
+}
 
     /**
      * Display the specified resource.
@@ -50,23 +58,36 @@ class IssueController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Issue $issue)
-    {
-        //
-    }
+{
+    $projects = Project::all();
+
+    return view('issues.edit', compact('issue', 'projects'));
+}
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Issue $issue)
     {
-        //
+         $issue->update([
+        'project_id' => $request->project_id,
+        'title' => $request->title,
+        'description' => $request->description,
+        'status' => $request->status,
+        'priority' => $request->priority,
+        'due_date' => $request->due_date,
+    ]);
+
+    return redirect()->route('issues.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Issue $issue)
-    {
-        //
-    }
+{
+    $issue->delete();
+
+    return redirect()->route('issues.index');
+}
 }

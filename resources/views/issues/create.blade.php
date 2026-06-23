@@ -1,20 +1,40 @@
-<select id="projectSelect" name="project_id">
-    @foreach($projects as $project)
-        <option value="{{ $project->id }}">{{ $project->name }}</option>
-    @endforeach
-</select>
 
-<div id="projectDetails"></div>
 
-<script>
-document.getElementById('projectSelect').addEventListener('change', function() {
-    let projectId = this.value;
+<form action="{{ route('issues.store') }}" method="POST">
+    @csrf
 
-    fetch('/projects/' + projectId) // route që kthen JSON
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('projectDetails').innerText =
-                data.description + " (Start: " + data.start_date + " | Deadline: " + data.deadline + ")";
-        });
-});
-</script>
+    <!-- Project dropdown -->
+    <select name="project_id">
+        @foreach($projects as $project)
+            <option value="{{ $project->id }}">{{ $project->name }}</option>
+        @endforeach
+    </select>
+
+    <br><br>
+
+    <input type="text" name="title" placeholder="Issue Title">
+    <br><br>
+
+    <textarea name="description" placeholder="Description"></textarea>
+    <br><br>
+
+    <select name="status">
+        <option value="open">Open</option>
+        <option value="in_progress">In Progress</option>
+        <option value="closed">Closed</option>
+    </select>
+    <br><br>
+
+    <select name="priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+    </select>
+    <br><br>
+
+    <input type="date" name="due_date">
+    <br><br>
+
+    <button type="submit">Save Issue</button>
+</form>
+
