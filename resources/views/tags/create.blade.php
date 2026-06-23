@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <h2>Create Tag</h2>
 
 <form action="{{ route('tags.store') }}" method="POST">
@@ -15,3 +19,7 @@
         Save Tag
     </button>
 </form>
+
+
+
+@endsection

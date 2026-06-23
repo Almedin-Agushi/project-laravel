@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <h2>Create Project</h2>
 
 <form action="{{ route('projects.store') }}" method="POST">
@@ -23,3 +26,5 @@
         Save Project
     </button>
 </form>
+
+@endsection

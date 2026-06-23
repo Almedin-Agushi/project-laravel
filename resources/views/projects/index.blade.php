@@ -1,12 +1,6 @@
-<nav>
-    <a href="{{ route('projects.index') }}">Projects</a> |
+@extends('layouts.app')
 
-    <a href="{{ route('issues.index') }}">Issues</a> |
-
-    <a href="{{ route('tags.index') }}">Tags</a>
-</nav>
-
-<hr>
+@section('content')
 
 <h2>Projects</h2>
 
@@ -38,3 +32,4 @@
     <hr>
 
 @endforeach
+@endsection

@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <h2>{{ $issue->title }}</h2>
 
 <p>{{ $issue->description }}</p>
@@ -26,3 +30,28 @@
     </button>
 </form>
 
+<hr>
+
+<h3>Comments</h3>
+
+@foreach($issue->comments as $comment)
+    <p>{{ $comment->content }}</p>
+@endforeach
+
+<form action="{{ route('comments.store', $issue->id) }}"
+      method="POST">
+
+    @csrf
+
+    <textarea name="content"></textarea>
+
+    <br><br>
+
+    <button type="submit">
+        Add Comment
+    </button>
+
+</form>
+
+
+@endsection

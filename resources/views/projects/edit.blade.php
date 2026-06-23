@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <h2>Edit Project</h2>
 
 <form action="{{ route('projects.update', $project->id) }}"
@@ -33,3 +37,7 @@
     </button>
 
 </form>
+
+
+
+@endsection

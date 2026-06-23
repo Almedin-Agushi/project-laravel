@@ -1,4 +1,6 @@
+@extends('layouts.app')
 
+@section('content')
 
 <form action="{{ route('issues.store') }}" method="POST">
     @csrf
@@ -38,3 +40,7 @@
     <button type="submit">Save Issue</button>
 </form>
 
+
+
+
+@endsection

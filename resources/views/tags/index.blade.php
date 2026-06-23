@@ -1,12 +1,6 @@
-<nav>
-    <a href="{{ route('projects.index') }}">Projects</a> |
+@extends('layouts.app')
 
-    <a href="{{ route('issues.index') }}">Issues</a> |
-
-    <a href="{{ route('tags.index') }}">Tags</a>
-</nav>
-
-<hr>
+@section('content')
 
 <h2>Tags</h2>
 
@@ -15,7 +9,29 @@
 <hr>
 
 @foreach($tags as $tag)
-    <h3>{{ $tag->name }}</h3>
-    <p>{{ $tag->color }}</p>
+
+    <p>{{ $tag->name }} - {{ $tag->color }}</p>
+    
+
+
+    <a href="{{ route('tags.edit', $tag->id) }}">
+        Edit
+    </a>
+
+    <form action="{{ route('tags.destroy', $tag->id) }}"
+          method="POST"
+          style="display:inline">
+
+        @csrf
+        @method('DELETE')
+
+        <button type="submit">
+            Delete
+        </button>
+    </form>
+
     <hr>
+
 @endforeach
+
+@endsection

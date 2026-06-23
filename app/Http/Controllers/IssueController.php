@@ -53,7 +53,7 @@ Issue::create($validated);
      */
     public function show(Issue $issue)
 {
-    $issue->load('tags');
+    $issue->load('tags', 'comments');
 
     $tags = Tag::all();
 

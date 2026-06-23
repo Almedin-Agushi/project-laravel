@@ -1,12 +1,8 @@
-<nav>
-    <a href="{{ route('projects.index') }}">Projects</a> |
+@extends('layouts.app')
 
-    <a href="{{ route('issues.index') }}">Issues</a> |
+@section('content')
 
-    <a href="{{ route('tags.index') }}">Tags</a>
-</nav>
 
-<hr>
 <h2>Issues</h2>
 
 @foreach($issues as $issue)
@@ -32,12 +28,14 @@
         @method('DELETE')
 
         <button type="submit">Delete</button>
-    </form>
-
-    <hr>
-
-    <a href="{{ route('issues.show', $issue->id) }}">
+    </form>  <br>  <br>
+ <a href="{{ route('issues.show', $issue->id) }}">
     View
 </a>
+    <hr>
+
+   
 
 @endforeach
+
+@endsection
