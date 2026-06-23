@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Issue;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Tag;
+
 
 class IssueController extends Controller
 {
@@ -50,9 +52,13 @@ Issue::create($validated);
      * Display the specified resource.
      */
     public function show(Issue $issue)
-    {
-        //
-    }
+{
+    $issue->load('tags');
+
+    $tags = Tag::all();
+
+    return view('issues.show', compact('issue', 'tags'));
+}
 
     /**
      * Show the form for editing the specified resource.
@@ -80,6 +86,16 @@ Issue::create($validated);
 
     return redirect()->route('issues.index');
     }
+
+
+    public function attachTag(Request $request, Issue $issue)
+{
+    $issue->tags()->syncWithoutDetaching([
+        $request->tag_id
+    ]);
+
+    return back();
+}
 
     /**
      * Remove the specified resource from storage.

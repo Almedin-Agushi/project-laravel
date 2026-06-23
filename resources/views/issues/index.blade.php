@@ -1,3 +1,12 @@
+<nav>
+    <a href="{{ route('projects.index') }}">Projects</a> |
+
+    <a href="{{ route('issues.index') }}">Issues</a> |
+
+    <a href="{{ route('tags.index') }}">Tags</a>
+</nav>
+
+<hr>
 <h2>Issues</h2>
 
 @foreach($issues as $issue)
@@ -26,5 +35,9 @@
     </form>
 
     <hr>
+
+    <a href="{{ route('issues.show', $issue->id) }}">
+    View
+</a>
 
 @endforeach

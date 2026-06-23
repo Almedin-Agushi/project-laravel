@@ -11,10 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('issue_tag', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+       Schema::create('issue_tag', function (Blueprint $table) {
+        $table->id();
+
+        $table->unsignedBigInteger('issue_id');
+        $table->unsignedBigInteger('tag_id');
+
+        $table->foreign('issue_id')
+              ->references('id')
+              ->on('issues')
+              ->onDelete('cascade');
+
+        $table->foreign('tag_id')
+              ->references('id')
+              ->on('tags')
+              ->onDelete('cascade');
+
+        $table->timestamps();
+    });
     }
 
     /**

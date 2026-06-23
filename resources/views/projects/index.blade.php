@@ -1,3 +1,13 @@
+<nav>
+    <a href="{{ route('projects.index') }}">Projects</a> |
+
+    <a href="{{ route('issues.index') }}">Issues</a> |
+
+    <a href="{{ route('tags.index') }}">Tags</a>
+</nav>
+
+<hr>
+
 <h2>Projects</h2>
 
 <a href="{{ route('projects.create') }}">Create Project</a>
