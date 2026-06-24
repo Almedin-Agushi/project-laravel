@@ -4,19 +4,27 @@
 
 <h2>Tags</h2>
 
-<a href="{{ route('tags.create') }}">Create Tag</a>
+<a href="{{ route('tags.create') }}">
+    Create Tag
+</a>
 
-<hr>
+<br><br>
 
 @foreach($tags as $tag)
 
-    <p>{{ $tag->name }} - {{ $tag->color }}</p>
-    
+<div class="card">
 
+    <h3>{{ $tag->name }}</h3>
 
+    <p>
+        Color:
+        <span style="color:{{ $tag->color }}">
+            {{ $tag->color }}
+        </span>
+    </p> 
     <a href="{{ route('tags.edit', $tag->id) }}">
         Edit
-    </a>
+    </a> | 
 
     <form action="{{ route('tags.destroy', $tag->id) }}"
           method="POST"
@@ -28,9 +36,10 @@
         <button type="submit">
             Delete
         </button>
+
     </form>
 
-    <hr>
+</div>
 
 @endforeach
 

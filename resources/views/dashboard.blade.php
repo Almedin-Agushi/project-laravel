@@ -4,20 +4,28 @@
 
 <h2>Dashboard</h2>
 
-<div class="card">
-    <h3>Projects: {{ $projects }}</h3>
-</div>
+<div class="dashboard-grid">
 
-<div class="card">
-    <h3>Issues: {{ $issues }}</h3>
-</div>
+    <div class="stat-card">
+        <h3>Projects</h3>
+        <p>{{ $projects }}</p>
+    </div>
 
-<div class="card">
-    <h3>Tags: {{ $tags }}</h3>
-</div>
+    <div class="stat-card">
+        <h3>Issues</h3>
+        <p>{{ $issues }}</p>
+    </div>
 
-<div class="card">
-    <h3>Comments: {{ $comments }}</h3>
+    <div class="stat-card">
+        <h3>Tags</h3>
+        <p>{{ $tags }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Comments</h3>
+        <p>{{ $comments }}</p>
+    </div>
+
 </div>
 
 @endsection

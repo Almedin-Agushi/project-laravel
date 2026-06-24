@@ -1,30 +1,46 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>Create Project</h2>
 
-<form action="{{ route('projects.store') }}" method="POST">
-    @csrf
+<div class="card">
 
-    <input type="text" name="name" placeholder="Project Name">
+    <h2>Create Project</h2>
 
-    <br><br>
+    <form action="{{ route('projects.store') }}" method="POST">
+        @csrf
 
-    <textarea name="description" placeholder="Description"></textarea>
+        <label for="name">Project Name</label>
+        <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Project Name">
 
-    <br><br>
+        <label for="description">Description</label>
+        <textarea
+            id="description"
+            name="description"
+            rows="4"
+            placeholder="Description"></textarea>
 
-    <input type="date" name="start_date">
+        <label for="start_date">Start Date</label>
+        <input
+            type="date"
+            id="start_date"
+            name="start_date">
 
-    <br><br>
+        <label for="deadline">End Date</label>
+        <input
+            type="date"
+            id="deadline"
+            name="deadline">
 
-    <input type="date" name="deadline">
+        <button type="submit">
+            Save Project
+        </button>
 
-    <br><br>
+    </form>
 
-    <button type="submit">
-        Save Project
-    </button>
-</form>
+</div>
 
 @endsection

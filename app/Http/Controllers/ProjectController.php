@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreProjectRequest;
 
 class ProjectController extends Controller
@@ -11,12 +10,12 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-   public function index()
-{
-    $projects = Project::all();
+    public function index()
+    {
+        $projects = Project::all();
 
-    return view('projects.index', compact('projects'));
-}
+        return view('projects.index', compact('projects'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -29,19 +28,21 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-   public function store(StoreProjectRequest $request)
-{
-    Project::create($request->validated());
+    public function store(StoreProjectRequest $request)
+    {
+        Project::create($request->validated());
 
-    return redirect()->route('projects.index')
-        ->with('success', 'Project created successfully');
-}
+        return redirect()
+            ->route('projects.index')
+            ->with('success', 'Project created successfully');
+    }
+
     /**
      * Display the specified resource.
      */
     public function show(Project $project)
     {
-    return response()->json($project);
+        return response()->json($project);
     }
 
     /**
@@ -49,18 +50,20 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-      return view('projects.edit', compact('project'));
+        return view('projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-   public function update(StoreProjectRequest $request, Project $project)
-{
-    $project->update($request->validated());
+    public function update(StoreProjectRequest $request, Project $project)
+    {
+        $project->update($request->validated());
 
-    return redirect()->route('projects.index');
-}
+        return redirect()
+            ->route('projects.index')
+            ->with('success', 'Project updated successfully');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -69,6 +72,8 @@ class ProjectController extends Controller
     {
         $project->delete();
 
-    return redirect()->route('projects.index');
+        return redirect()
+            ->route('projects.index')
+            ->with('success', 'Project deleted successfully');
     }
 }

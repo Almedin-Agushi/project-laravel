@@ -2,56 +2,92 @@
 
 @section('content')
 
-<h2>{{ $issue->title }}</h2>
+<div class="card">
 
-<p>{{ $issue->description }}</p>
+    <h2>{{ $issue->title }}</h2>
 
-<h3>Current Tags</h3>
+    <p>{{ $issue->description }}</p>
 
-@foreach($issue->tags as $tag)
-    <p>{{ $tag->name }} - {{ $tag->color }}</p>
-@endforeach
+    <p>
+        <strong>Status:</strong>
 
-<hr>
+        @if($issue->status == 'open')
+            <span class="badge-open">Open</span>
+        @elseif($issue->status == 'in_progress')
+            <span class="badge-progress">In Progress</span>
+        @else
+            <span class="badge-closed">Closed</span>
+        @endif
+    </p>
 
-<form action="{{ route('issues.attachTag', $issue->id) }}" method="POST">
-    @csrf
+    <p>
+        <strong>Priority:</strong>
+        {{ $issue->priority }}
+    </p>
 
-    <select name="tag_id">
-        @foreach($tags as $tag)
-            <option value="{{ $tag->id }}">
-                {{ $tag->name }} 
-            </option>
-        @endforeach
-    </select>
+    <p>
+        <strong>Due Date:</strong>
+        {{ $issue->due_date }}
+    </p>
 
-    <button type="submit">
-        Attach Tag
-    </button>
-</form>
+    <h3>Current Tags</h3>
 
-<hr>
+    @foreach($issue->tags as $tag)
+        <span style="
+            background: {{ strtolower($tag->color) }};
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-right: 5px;
+        ">
+            {{ $tag->name }}
+        </span>
+    @endforeach
 
-<h3>Comments</h3>
+    <hr>
 
-@foreach($issue->comments as $comment)
-    <p>{{ $comment->content }}</p>
-@endforeach
+    <form action="{{ route('issues.attachTag', $issue->id) }}" method="POST">
+        @csrf
 
-<form action="{{ route('comments.store', $issue->id) }}"
-      method="POST">
+        <select name="tag_id">
+            @foreach($tags as $tag)
+                <option value="{{ $tag->id }}">
+                    {{ $tag->name }}
+                </option>
+            @endforeach
+        </select>
 
-    @csrf
+        <button type="submit">
+            Attach Tag
+        </button>
+    </form>
 
-    <textarea name="content"></textarea>
+    <hr>
 
-    <br><br>
+    <h3>Comments</h3>
 
-    <button type="submit">
-        Add Comment
-    </button>
+    @foreach($issue->comments as $comment)
+        <div class="card">
+            {{ $comment->content }}
+        </div>
+    @endforeach
 
-</form>
+    <form action="{{ route('comments.store', $issue->id) }}"
+          method="POST">
 
+        @csrf
+
+        <textarea
+            name="content"
+            rows="4"
+            placeholder="Write a comment..."></textarea>
+
+        <button type="submit">
+            Add Comment
+        </button>
+
+    </form>
+
+</div>
 
 @endsection

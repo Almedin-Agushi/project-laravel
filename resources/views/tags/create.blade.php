@@ -2,24 +2,33 @@
 
 @section('content')
 
-<h2>Create Tag</h2>
+<div class="card">
 
-<form action="{{ route('tags.store') }}" method="POST">
-    @csrf
+    <h2>Create Tag</h2>
 
-    <input type="text" name="name" placeholder="Tag Name">
+    <form action="{{ route('tags.store') }}" method="POST">
+        @csrf
 
-    <br><br>
+        <label for="name">Tag Name</label>
+        <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Tag Name">
 
-    <input type="text" name="color" placeholder="Color">
+        <label for="color">Color</label>
+        <input
+            type="text"
+            id="color"
+            name="color"
+            placeholder="Red, Blue, Green...">
 
-    <br><br>
+        <button type="submit">
+            Save Tag
+        </button>
 
-    <button type="submit">
-        Save Tag
-    </button>
-</form>
+    </form>
 
-
+</div>
 
 @endsection

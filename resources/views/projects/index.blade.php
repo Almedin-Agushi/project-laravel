@@ -4,32 +4,55 @@
 
 <h2>Projects</h2>
 
-<a href="{{ route('projects.create') }}">Create Project</a>
-
-<hr>
+<p>
+    <a href="{{ route('projects.create') }}">
+        Create Project
+    </a>
+</p>
 
 @foreach($projects as $project)
+
+<div class="card">
 
     <h3>{{ $project->name }}</h3>
 
     <p>{{ $project->description }}</p>
 
-    <a href="{{ route('projects.edit', $project->id) }}">
-        Edit
-    </a>
+    @if($project->start_date)
+        <p>
+            <strong>Start Date:</strong>
+            {{ $project->start_date }}
+        </p>
+    @endif
 
-    <form action="{{ route('projects.destroy', $project->id) }}"
-          method="POST"
-          style="display:inline">
-        @csrf
-        @method('DELETE')
+    @if($project->deadline)
+        <p>
+            <strong>End Date:</strong>
+            {{ $project->deadline }}
+        </p>
+    @endif
 
-        <button type="submit">
-            Delete
-        </button>
-    </form>
+    <div style="margin-top:15px;">
 
-    <hr>
+        <a href="{{ route('projects.edit', $project->id) }}">
+            Edit
+        </a>
+
+        <form action="{{ route('projects.destroy', $project->id) }}"
+              method="POST"
+              style="display:inline;">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit">
+                Delete
+            </button>
+        </form>
+
+    </div>
+
+</div>
 
 @endforeach
+
 @endsection

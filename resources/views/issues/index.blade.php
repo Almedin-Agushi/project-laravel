@@ -2,49 +2,56 @@
 
 @section('content')
 
-
 <h2>Issues</h2>
 
 <form method="GET">
-
     <input type="text"
            name="search"
            placeholder="Search issue..."
            value="{{ request('search') }}">
 
-    <button type="submit">
-        Search
-    </button>
-
+    <button type="submit">Search</button>
 </form>
 
 <br>
 
 @foreach($issues as $issue)
 
-    <h3>{{ $issue->title }}</h3>
+    <div class="card">
+        
+        <h3>{{ $issue->title }}</h3>
 
-    <p>{{ $issue->description }}</p>
+        <p>{{ $issue->description }}</p>
 
-    <p>
-    Status:
+        <p>
+            <strong>Project:</strong>
+            {{ $issue->project->name ?? 'No Project' }}
+        </p>
 
-    @if($issue->status == 'open')
-        <span class="badge-open">Open</span>
-    @elseif($issue->status == 'in_progress')
-        <span class="badge-progress">In Progress</span>
-    @else
-        <span class="badge-closed">Closed</span>
-    @endif
+        <p>
+            <strong>Priority:</strong>
+            {{ ucfirst($issue->priority) }}
+        </p>
+
+        <p>
+            <strong>Due Date:</strong>
+            {{ $issue->due_date }}
+        </p>
+        <p>
+        <strong>Tags:</strong>
+
+        @foreach($issue->tags as $tag)
+            <span class="tag-badge">
+                {{ $tag->name }}
+            </span>
+    @endforeach
 </p>
 
-    <p>Priority: {{ $issue->priority }}</p>
 
-    <p>Project: {{ $issue->project->name ?? 'No Project' }}</p>
+    <br>
 
-    <a href="{{ route('issues.edit', $issue->id) }}">
-        Edit
-    </a>
+    <a href="{{ route('issues.show', $issue->id) }}">View</a> |
+    <a href="{{ route('issues.edit', $issue->id) }}">Edit</a>
 
     <form action="{{ route('issues.destroy', $issue->id) }}"
           method="POST"
@@ -53,13 +60,9 @@
         @method('DELETE')
 
         <button type="submit">Delete</button>
-    </form>  <br>  <br>
- <a href="{{ route('issues.show', $issue->id) }}">
-    View
-</a>
-    <hr>
+    </form>
 
-   
+</div>
 
 @endforeach
 
