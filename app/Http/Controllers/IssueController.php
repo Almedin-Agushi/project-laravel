@@ -19,7 +19,7 @@ class IssueController extends Controller
 
     $issues = Issue::with('project')
         ->when($search, function ($query) use ($search) {
-            $query->where('title', 'like', "%{$search}%");
+            $query->where('title', 'like', '%' . $search . '%');
         })
         ->get();
 

@@ -6,12 +6,16 @@
 <h2>Issues</h2>
 
 <form method="GET">
+
     <input type="text"
            name="search"
            placeholder="Search issue..."
            value="{{ request('search') }}">
 
-    <button type="submit">Search</button>
+    <button type="submit">
+        Search
+    </button>
+
 </form>
 
 <br>
@@ -22,7 +26,17 @@
 
     <p>{{ $issue->description }}</p>
 
-    <p>Status: {{ $issue->status }}</p>
+    <p>
+    Status:
+
+    @if($issue->status == 'open')
+        <span class="badge-open">Open</span>
+    @elseif($issue->status == 'in_progress')
+        <span class="badge-progress">In Progress</span>
+    @else
+        <span class="badge-closed">Closed</span>
+    @endif
+</p>
 
     <p>Priority: {{ $issue->priority }}</p>
 

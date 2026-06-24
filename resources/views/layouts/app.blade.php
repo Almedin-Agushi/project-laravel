@@ -44,7 +44,29 @@ hr {
     background: #fff;
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0
+    box-shadow: 0 4px 12px }
+
+
+    .badge-open{
+    background: green;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+.badge-progress{
+    background: orange;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+.badge-closed{
+    background: red;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 5px;
+}
     </style>
 </head>
 <body>
