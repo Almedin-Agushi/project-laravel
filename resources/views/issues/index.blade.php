@@ -5,6 +5,17 @@
 
 <h2>Issues</h2>
 
+<form method="GET">
+    <input type="text"
+           name="search"
+           placeholder="Search issue..."
+           value="{{ request('search') }}">
+
+    <button type="submit">Search</button>
+</form>
+
+<br>
+
 @foreach($issues as $issue)
 
     <h3>{{ $issue->title }}</h3>

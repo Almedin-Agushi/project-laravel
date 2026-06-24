@@ -13,12 +13,18 @@ class IssueController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-         $issues = Issue::with('project')->get();
+  public function index(Request $request)
+{
+    $search = $request->search;
+
+    $issues = Issue::with('project')
+        ->when($search, function ($query) use ($search) {
+            $query->where('title', 'like', "%{$search}%");
+        })
+        ->get();
 
     return view('issues.index', compact('issues'));
-    }
+}
 
     /**
      * Show the form for creating a new resource.
